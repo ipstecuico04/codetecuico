@@ -2,12 +2,10 @@
     ViewBag.Title = "Messaging App";
 }
 
-<h1>Signal R</h1>
-
 <div class="row">
     <div class="col-md-6">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Message" data-bind="value:message" />
+            <input type="text" class="form-control" placeholder="type your message here..." data-bind="value:message" />
             <span class="input-group-btn">
                 <button class="btn btn-primary" data-bind="click:sendMessage"><span class="glyphicon glyphicon-send"></span></button>
             </span>
