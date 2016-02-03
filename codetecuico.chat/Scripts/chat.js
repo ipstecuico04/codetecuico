@@ -1,37 +1,32 @@
-﻿(function () {
+﻿
+var chatHub = $.connection.chatHub;
+$.connection.hub.logging = true;
+$.connection.hub.start();
 
-    var chatHub = $.connection.chatHub;
-    $.connection.hub.logging = true;
-    $.connection.hub.start();
+chatHub.client.newMessage = function (message) {
+    model.addMessage(message);
+};
 
-    chatHub.client.newMessage = function (message) {
-        model.addMessage(message);
-    };
+var Model = function () {
+    var self = this;
+    self.message = ko.observable(""),
+    self.messages = ko.observableArray()
+};
 
-    var Model = function () {
+Model.prototype = {
+    sendMessage: function () {
         var self = this;
-        self.message = ko.observable(""),
-        self.messages = ko.observableArray()
-    };
+        chatHub.server.send(self.message());
+        self.message("");
+    },
+    addMessage: function (message) {
+        var self = this;
+        self.messages.push(message);
+    } 
+};
 
-    Model.prototype = {
-        
-        sendMessage: function () {
-            var self = this;
-            chatHub.server.send(self.message());
-            self.message("");
-        },
+var model = new Model();
 
-        addMessage: function (message) {
-            var self = this;
-            self.messages.push(message);
-        } 
-    };
-
-    var model = new Model();
-
-    $(function () {
-        ko.applyBindings(model);
-    });
-
-}());
+$(function () {
+    ko.applyBindings(model);
+});
