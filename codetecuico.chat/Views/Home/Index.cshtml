@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Messaging App";
+}
+
+<h1>Signal R</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <div data-bind="foreach:messages">
+            <div data-bind="text: $data"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Message" data-bind="value:message" />
+            <span class="input-group-btn">
+                <button class="btn btn-primary" data-bind="click:sendMessage">Send</button>
+            </span>
+        </div>
+    </div>
+</div>
+
+    @section Scripts {
+
+        <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+        <script src="~/SignalR/hubs"></script>
+        <script src="~/Scripts/knockout-3.4.0.js"></script>
+        <script src="~/Scripts/chat.js"></script>
+
+    }
