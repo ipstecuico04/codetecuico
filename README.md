@@ -1,3 +1,3 @@
 # codetecuico
 
-Welcome to codetecuico project!
+Messaging App using SignalR and Knockoutjs
